@@ -61,16 +61,16 @@ test('set_answer successfully sets the universal answer', async (t) => {
 
 test('set_answer fails to set the universal answer when called from external account id', async (t) => {
   const { root, contract } = t.context.accounts;
-  const result = await root.callRaw(contract, 'set_answer', {});
+  const resultError = await root.callRaw(contract, 'set_answer', {});
 
-  t.is(true, checkResultError(result));
+  t.is(true, checkResultError(resultError));
 });
 
 
 function checkResultError(result: any): boolean {
-  if (result.receiptFailureMessagesContain("Function is private")) {
+  if (result.receiptFailureMessagesContain('Function is private')) {
     return true;
   } else {
-    return result.receiptFailureMessagesContain("Method set_answer is private");
+    return result.receiptFailureMessagesContain('Method set_answer is private');
   }
 }
