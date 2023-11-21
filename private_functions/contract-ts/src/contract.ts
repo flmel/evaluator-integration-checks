@@ -11,7 +11,7 @@ class PrivateFunctions {
     return this.answer;
   }
 
-  // 1. Write a internal function "add" that's only callable by the contracts code
+  // 1. Write an internal function "add" that's only callable by the contracts code
   // The function should accept two numbers a and b and returns the sum of the two parameters
 
   // 2. Write a public function "get_sum" that accepts two numbers a and b and returns the sum of the two parameters

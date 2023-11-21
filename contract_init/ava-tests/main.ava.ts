@@ -50,6 +50,8 @@ test('get_greeting returns the default greeting', async (t) => {
   const { contract } = t.context.accounts;
   const greeting: string = await contract.view('get_greeting', {});
 
+  //const resultError: any = await contract.callRaw(contract, 'get_greeting');
+
   t.is(greeting, 'Hello');
 });
 

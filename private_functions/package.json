@@ -10,7 +10,7 @@
     "test-ts": "$npm_execpath run build-ts && ava -- ./contract-ts/build/private_functions.wasm",
     "build-rs": "cd contract-rs && ./build.sh",
     "build-ts": "cd contract-ts && $npm_execpath run build",
-    "postinstall": "cd contract-ts && $npm_execpath i"
+    "postinstall": "cd contract-ts && $npm_execpath install"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.4",
