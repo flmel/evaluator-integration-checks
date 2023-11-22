@@ -12,7 +12,6 @@ impl Default for Contract {
     }
 }
 
-// Implement the contract structure
 #[near_bindgen]
 impl Contract {
     // TODO: Add a method 'check_caller_is_bob' that returns true if the caller account_id is 'bob.test.near'

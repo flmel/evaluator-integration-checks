@@ -40,7 +40,7 @@ test('check_caller_is_bob returns true when called by specific accountId', async
 
 test('check_caller_is_bob returns false when called by non-expected accountId', async (t) => {
   const { contract, bob } = t.context.accounts;
-  const result = await contract.call(contract, 'check_predecessor', {});
+  const result = await contract.call(contract, 'check_caller_is_bob', {});
 
   t.is(result, false);
 });
@@ -84,14 +84,14 @@ test('check_enough_deposit returns false when deposit is less than 1N', async (t
 
 test('check_enough_gas returns true when gas is greater than 250TGas', async (t) => {
   const { contract, bob } = t.context.accounts;
-  const result = await bob.call(contract, 'check_enough_gas', {}, { attachedGas: '260000000000000' });
+  const result = await bob.call(contract, 'check_enough_gas', {}, { gas: '260000000000000' });
 
   t.is(result, true);
 });
 
 test('check_enough_gas returns false when gas is less than 250TGas', async (t) => {
   const { contract, bob } = t.context.accounts;
-  const result = await bob.call(contract, 'check_enough_gas', {}, { attachedGas: '100000000000000' });
+  const result = await bob.call(contract, 'check_enough_gas', {}, { gas: '100000000000000' });
 
   t.is(result, false);
 });

@@ -1,8 +1,8 @@
 // Find all our documentation at https://docs.near.org
-import { NearBindgen, near } from 'near-sdk-js';
+import { NearBindgen } from 'near-sdk-js';
 
 @NearBindgen({})
-class EnvVariables {
+class Contract {
   // TODO: Add a method 'check_caller_is_bob' that returns true if the caller account_id is 'bob.test.near'
 
   // TODO: Add a method 'check_caller_is_the_contract' that returns true if the contract is calling itself
