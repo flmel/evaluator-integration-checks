@@ -31,39 +31,67 @@ test.afterEach.always(async (t) => {
   });
 });
 
-test('check_predecessor returns true when called by specific accountId', async (t) => {
+test('check_caller_is_bob returns true when called by specific accountId', async (t) => {
   const { contract, bob } = t.context.accounts;
-  const result = await bob.call(contract, 'check_predecessor', {});
+  const result = await bob.call(contract, 'check_caller_is_bob', {});
 
   t.is(result, true);
 });
 
-test('check_predecessor returns false when called by non-expected accountId', async (t) => {
+test('check_caller_is_bob returns false when called by non-expected accountId', async (t) => {
   const { contract, bob } = t.context.accounts;
   const result = await contract.call(contract, 'check_predecessor', {});
 
   t.is(result, false);
 });
 
-test('get_block_height returns correct height', async (t) => {
-  const { root, contract } = t.context.accounts;
-  const rawResult = await contract.viewRaw('get_height');
-
-  let returnedHeight = JSON.parse(rawResult.result.map((x) => String.fromCharCode(x)).join(''));
-
-  t.is(true, returnedHeight == rawResult.block_height);
-});
-
-test('check_deposit returns true when deposit is greater than 1N', async (t) => {
-  const { contract, bob } = t.context.accounts;
-  const result = await bob.call(contract, 'check_deposit', {}, { attachedDeposit: '1000000000000000000000000' });
+test('check_caller_is_the_contract returns true when called by the contracts own accountId', async (t) => {
+  const { contract } = t.context.accounts;
+  const result = await contract.call(contract, 'check_caller_is_the_contract', {});
 
   t.is(result, true);
 });
 
-test('check_deposit returns false when deposit is less than 1N', async (t) => {
+test('check_caller_is_the_contract returns false when called by non-expected accountId', async (t) => {
   const { contract, bob } = t.context.accounts;
-  const result = await bob.call(contract, 'check_deposit', {}, { attachedDeposit: '500000000000000000000000' });
+  const result = await bob.call(contract, 'check_caller_is_the_contract', {});
+
+  t.is(result, false);
+});
+
+test('get_height returns correct block height', async (t) => {
+  const { root, contract } = t.context.accounts;
+  const rawResult = await contract.viewRaw('get_height');
+
+  const returnedHeight = JSON.parse(rawResult.result.map((x) => String.fromCharCode(x)).join(''));
+
+  t.is(true, returnedHeight == rawResult.block_height);
+});
+
+test('check_enough_deposit returns true when deposit is greater than 1N', async (t) => {
+  const { contract, bob } = t.context.accounts;
+  const result = await bob.call(contract, 'check_enough_deposit', {}, { attachedDeposit: '1000000000000000000000000' });
+
+  t.is(result, true);
+});
+
+test('check_enough_deposit returns false when deposit is less than 1N', async (t) => {
+  const { contract, bob } = t.context.accounts;
+  const result = await bob.call(contract, 'check_enough_deposit', {}, { attachedDeposit: '500000000000000000000000' });
+
+  t.is(result, false);
+});
+
+test('check_enough_gas returns true when gas is greater than 250TGas', async (t) => {
+  const { contract, bob } = t.context.accounts;
+  const result = await bob.call(contract, 'check_enough_gas', {}, { attachedGas: '260000000000000' });
+
+  t.is(result, true);
+});
+
+test('check_enough_gas returns false when gas is less than 250TGas', async (t) => {
+  const { contract, bob } = t.context.accounts;
+  const result = await bob.call(contract, 'check_enough_gas', {}, { attachedGas: '100000000000000' });
 
   t.is(result, false);
 });
