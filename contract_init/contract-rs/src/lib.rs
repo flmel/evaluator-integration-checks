@@ -1,5 +1,5 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{near_bindgen, PanicOnDefault};
+use near_sdk::near_bindgen;
 
 // TODO: Derive a macro to enforce initialization
 #[near_bindgen]
