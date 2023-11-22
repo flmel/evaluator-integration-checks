@@ -3,7 +3,7 @@ use near_sdk::{near_bindgen, PanicOnDefault};
 
 // TODO: Derive a macro to enforce initialization
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+#[derive(BorshDeserialize, BorshSerialize)]
 pub struct Contract {
     greeting: String,
 }
