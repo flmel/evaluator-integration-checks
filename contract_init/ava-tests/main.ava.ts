@@ -46,17 +46,17 @@ test('init fails to reinitialize the greeting', async (t) => {
   t.is(checkResultError(resultError), true);
 });
 
-test('get_greeting returns the default greeting', async (t) => {
+test('get_greeting returns the greeting', async (t) => {
   const { contract } = t.context.accounts;
+  await contract.call(contract, 'init', { greeting: 'Hello World!' });
   const greeting: string = await contract.view('get_greeting', {});
 
-  //const resultError: any = await contract.callRaw(contract, 'get_greeting');
-
-  t.is(greeting, 'Hello');
+  t.is(greeting, 'Hello World!');
 });
 
 test('set_greeting changes the greeting', async (t) => {
   const { root, contract } = t.context.accounts;
+  await root.call(contract, 'init', { greeting: 'Hello World' });
   await root.call(contract, 'set_greeting', { greeting: 'Howdy' });
   const greeting: string = await contract.view('get_greeting', {});
 

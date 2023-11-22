@@ -1,11 +1,11 @@
-import { NearBindgen, near, call, view, initialize } from 'near-sdk-js';
+import { NearBindgen, near, call, view, } from 'near-sdk-js';
 
-// Change the decorator to enforce initialization
+// TODO: Add the decorator to enforce initialization
 @NearBindgen({})
-class HelloNear {
-  greeting: string;
+class Contract {
+  // TODO: Add and initialize a field called 'greeting' of type string
 
-  // Add initialization method called 'init' that accepts (greeting: string) and sets the state
+  // TODO: Add initialization function called 'init' that accepts (greeting: string) and sets the state with this value
 
   @view({})
   get_greeting(): string {
