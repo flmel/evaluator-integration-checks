@@ -48,6 +48,9 @@ test("store_input transforms and returns the datastructure", async (t) => {
 
 
 test('get_data returns the correct datastructure', async (t) => {
+  const { contract } = t.context.accounts;
+
+
 
 });
 

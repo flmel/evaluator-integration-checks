@@ -3,9 +3,9 @@ import { AccountId, Vector } from 'near-sdk-js';
 export class MockStructure {
   big: bigint;
   small: number;
-  vector: Vector<BigInt>;
+  vector: BigInt[];
 
-  constructor({ big, small, vector }: { big: bigint, small: number, vector: Vector<BigInt> }) {
+  constructor({ big, small, vector }: { big: bigint, small: number, vector: BigInt[] }) {
     this.big = big;
     this.small = small;
     this.vector = vector;

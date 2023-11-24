@@ -19,9 +19,9 @@ use near_sdk::{
 #[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone)]
 #[serde(crate = "near_sdk::serde")]
 pub struct MockStructure {
-    big: U64,
+    big: u64,
     small: u8,
-    vector: Vec<U64>,
+    vector: Vec<u64>,
 }
 
 #[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone)]
@@ -42,19 +42,23 @@ pub struct Point {
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize)]
 pub struct Contract {
-    vector: Vector<MockReturn>,
+    output: MockReturn,
 }
 
 impl Default for Contract {
     fn default() -> Self {
         Self {
-            vector: Vector::new(b"a"),
+            output: new MockReturn()
         }
     }
 }
 
 #[near_bindgen]
 impl Contract {
+
+    // define store input
+    // define default 
+    //  test 
     pub fn store_input(
         &mut self,
         account_id: AccountId,
@@ -77,13 +81,10 @@ impl Contract {
         self.vector.push(mock.clone());
 
         return mock;
+        retunr json here 
     }
 
-    pub fn get_data(&self) -> Vec<&MockReturn> {
-        let mut result = Vec::new();
-        for i in 0..self.vector.len() {
-            result.push(self.vector.get(i).unwrap());
-        }
-        return result;
+    pub fn get_data(&self) -> MockReturn {
+        return self.output;
     }
 }

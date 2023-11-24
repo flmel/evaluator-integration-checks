@@ -14,17 +14,13 @@ class Contract {
     point: Point
   }): MockReturn {
 
-    let vec = new Vector<BigInt>("vec");
-    vec.push(BigInt(1));
-    vec.push(BigInt(2));
-
     const mock = new MockReturn({
       account,
       x: point.x,
       structure: new MockStructure({
         big: BigInt(number_big),
         small: number_small,
-        vector: vec,
+        vector: [BigInt(1), BigInt(2), BigInt(3)]
       })
     });
 
@@ -38,5 +34,6 @@ class Contract {
   @view({})
   get_data(): Array<MockReturn> {
     return this.vector.toArray();
+    // { prefix: "mr" length: 1 }
   }
 }
