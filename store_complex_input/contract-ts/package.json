@@ -1,0 +1,20 @@
+{
+  "name": "store_complex_input",
+  "version": "1.0.0",
+  "license": "(MIT AND Apache-2.0)",
+  "engines": {
+    "node": "16.x"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "near-sdk-js build src/contract.ts build/store_complex_input.wasm"
+  },
+  "dependencies": {
+    "near-cli": "^3.4.2",
+    "near-sdk-js": "1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "ts-morph": "^20.0.0"
+  }
+}
