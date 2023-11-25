@@ -19,6 +19,7 @@ neardev
 # PRODUCTION
 /build
 build
+.cargo
 
 # MISC
 .DS_Store
