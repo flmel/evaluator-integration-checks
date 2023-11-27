@@ -1,3 +1,4 @@
+import * as borsh from 'borsh';
 import { Worker, NearAccount } from 'near-workspaces';
 import anyTest, { TestFn } from 'ava';
 
@@ -30,27 +31,66 @@ test.afterEach.always(async (t) => {
   });
 });
 
-test("store_input transforms and returns the datastructure", async (t) => {
-  const { root, contract } = t.context.accounts;
-  const result = await contract.call(contract, 'store_input', {
-    account: root.accountId,
-    number_big: '1234567890123456789012345678901234567890',
-    number_small: 123,
-    point: {
-      x: 1,
-      y: 2,
+const schema = {
+  struct: {
+    account: 'string',
+    x: 'i32',
+    structure: {
+      struct: {
+        big: 'u64',
+        small: 'u8',
+        'vector': { array: { type: 'u64' } }
+      }
     }
-  });
+  }
+}
 
-  console.log(result);
-  // t.is(result, true);
-});
+const inputArgs = {
+  account_id: 'evaluator.near',
+  number_big: '3298749238747777',
+  number_small: 231,
+  point: {
+    x: 19,
+    y: 6,
+  }
+}
 
+const expectedOutput = {
+  account: 'evaluator.near',
+  x: 19,
+  structure: {
+    big: 3298749238747777,
+    small: 231,
+    vector: ['3298749238747777', '42']
+  }
+}
 
-test('get_data returns the correct datastructure', async (t) => {
+test('provide_output returns the correct data structure', async (t) => {
   const { contract } = t.context.accounts;
+  const output = await contract.call(contract, 'provide_output', inputArgs);
 
-
-
+  t.deepEqual(output, expectedOutput);
 });
 
+
+test('provide_output stores the correct data structure', async (t) => {
+  const { contract } = t.context.accounts;
+  await contract.call(contract, 'provide_output', inputArgs);
+
+  const state = await contract.viewState();
+  const data = state.getRaw('STATE');
+
+  const storedStruct: any = borsh.deserialize(schema, data);
+
+  const { structure: { big, vector } } = expectedOutput;
+  const typedOutput = {
+    ...expectedOutput,
+    structure: {
+      ...expectedOutput.structure,
+      big: BigInt(big),
+      vector: vector.map(value => BigInt(value))
+    }
+  };
+
+  t.deepEqual(storedStruct, typedOutput);
+});
