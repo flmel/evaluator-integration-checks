@@ -1,3 +1,4 @@
+// Find all documentation at https://docs.near.org
 import { NearBindgen, near, call, view, } from 'near-sdk-js';
 
 // TODO: Add the decorator to enforce initialization

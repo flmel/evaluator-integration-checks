@@ -1,4 +1,4 @@
-// Find all our documentation at https://docs.near.org
+// Find all documentation at https://docs.near.org
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::json_types::U128;
 use near_sdk::{near_bindgen, Balance, PanicOnDefault};
