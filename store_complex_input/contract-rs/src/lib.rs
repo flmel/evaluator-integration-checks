@@ -6,7 +6,7 @@ use near_sdk::{
 
 // TODO: Add all the data structures necessary
 
-// TODO: Make sure you store your data structures in the contract storage
+// TODO: Store your data structure the key `output` of the contract storage
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Contract {}

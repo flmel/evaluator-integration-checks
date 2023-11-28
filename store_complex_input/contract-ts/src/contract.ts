@@ -7,20 +7,20 @@ class Contract {
   vector: Vector<MockReturn> = new Vector<MockReturn>("mr");
 
   @call({})
-  store_input({ account, number_big, number_small, point }: {
-    account: AccountId,
+  store_input({ account_id, number_big, number_small, point }: {
+    account_id: AccountId,
     number_big: string,
     number_small: number,
     point: Point
   }): MockReturn {
 
     const mock = new MockReturn({
-      account,
+      account: account_id,
       x: point.x,
       structure: new MockStructure({
         big: BigInt(number_big),
         small: number_small,
-        vector: [BigInt(1), BigInt(2), BigInt(3)]
+        vector: [number_big.toString(), '42']
       })
     });
 
@@ -28,12 +28,5 @@ class Contract {
 
 
     return mock;
-  }
-
-  // Get the answer (public)
-  @view({})
-  get_data(): Array<MockReturn> {
-    return this.vector.toArray();
-    // { prefix: "mr" length: 1 }
   }
 }
