@@ -1,4 +1,4 @@
-// Find all our documentation at https://docs.near.org
+// Find all documentation at https://docs.near.org
 import { NearBindgen, view } from 'near-sdk-js';
 
 @NearBindgen({})
