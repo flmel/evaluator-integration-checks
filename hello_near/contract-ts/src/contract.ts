@@ -1,3 +1,4 @@
+// Find all documentation at https://docs.near.org
 import { NearBindgen } from 'near-sdk-js';
 
 @NearBindgen({})
